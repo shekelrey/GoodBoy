@@ -559,10 +559,26 @@
         const aiResponseText = document.getElementById('aiResponseText');
         const aiLoading = document.getElementById('aiLoading');
 
+        // List of models to try in order (Fallback mechanism)
+        const MODELS_TO_TRY = [
+            "gemini-1.5-flash",
+            "gemini-1.5-flash-001",
+            "gemini-1.5-flash-002",
+            "gemini-1.5-pro",
+            "gemini-1.5-pro-001",
+            "gemini-pro",
+            "gemini-1.0-pro"
+        ];
+
         getAdviceBtn.addEventListener('click', async () => {
             const userInput = dogDescription.value.trim();
             if (!userInput) {
                 alert('ספרו לנו קצת על הכלב בבקשה!');
+                return;
+            }
+
+            if (apiKey === "AIzaSyAei8pMCWcDvrwrRxFjp8zgIjOZCM8Fw0c" || apiKey.length < 10) {
+                alert("שגיאה: חסר מפתח API.\nנא להוסיף את ה-AIza Key לקוד.");
                 return;
             }
 
@@ -571,54 +587,64 @@
             getAdviceBtn.disabled = true;
             getAdviceBtn.classList.add('opacity-50');
 
-             try {
-                // CHANGED: Switched to 'gemini-2.5-flash-preview-09-2025' as requested
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: `You are a helpful expert at "GoodBoy" pet delivery Israel. 
-                                User Input: "${userInput}"
-                                
-                                Task: Recommend a "Perfect Bundle" containing:
-                                1. ONE specific Dog Food Brand (Acana, Orijen, Royal Canin, Go, Monge).
-                                2. ONE specific Treat Type (Natural Ear, Jerky, Biscuits).
-                                3. ONE specific Toy Type (Kong, Rope, Plush).
-                                
-                                Rules:
-                                - Reply in Hebrew.
-                                - Be short, fun, and emoji-rich.
-                                - Explain WHY this combo fits the dog description.`
+            let success = false;
+            let lastError = "";
+
+            // Try models one by one until success
+            for (const model of MODELS_TO_TRY) {
+                console.log(`Trying model: ${model}...`);
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: `You are a helpful expert at "GoodBoy" pet delivery Israel. 
+                                    User Input: "${userInput}"
+                                    
+                                    Task: Recommend a "Perfect Bundle" containing:
+                                    1. ONE specific Dog Food Brand (Acana, Orijen, Royal Canin, Go, Monge).
+                                    2. ONE specific Treat Type (Natural Ear, Jerky, Biscuits).
+                                    3. ONE specific Toy Type (Kong, Rope, Plush).
+                                    
+                                    Rules:
+                                    - Reply in Hebrew.
+                                    - Be short, fun, and emoji-rich.
+                                    - Explain WHY this combo fits the dog description.`
+                                }]
                             }]
-                        }]
-                    })
-                });
+                        })
+                    });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error("Gemini API Error Details:", errorData);
-                    // Extract the specific error message from Google
-                    const errorMessage = errorData.error?.message || `Status: ${response.status}`;
-                    throw new Error(errorMessage);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error?.message || `Status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    const aiText = data.candidates[0].content.parts[0].text;
+                    
+                    aiResponseText.innerHTML = marked.parse(aiText);
+                    aiResponse.classList.remove('hidden');
+                    success = true;
+                    break; // Stop loop if successful
+
+                } catch (error) {
+                    console.warn(`Model ${model} failed:`, error.message);
+                    lastError = error.message;
+                    // Continue to next model...
                 }
-                
-                const data = await response.json();
-                const aiText = data.candidates[0].content.parts[0].text;
-                
-                aiResponseText.innerHTML = marked.parse(aiText);
-                aiResponse.classList.remove('hidden');
-
-            } catch (error) {
-                console.error("Full Error Object:", error);
-                // Show the specific error in the alert to help debugging
-                alert(`שגיאה בחיבור ל-AI:\n${error.message}\n\n(בדוק את ה-API Key או הרשאות הדומיין)`);
-            } finally {
-                aiLoading.classList.add('hidden');
-                getAdviceBtn.disabled = false;
-                getAdviceBtn.classList.remove('opacity-50');
             }
+
+            if (!success) {
+                console.error("All models failed.");
+                alert(`שגיאה בחיבור ל-AI (כל המודלים נכשלו):\n${lastError}\n\nטיפ: בדוק ב-Google Cloud Console שה-API "Generative Language API" מופעל.`);
+            }
+
+            aiLoading.classList.add('hidden');
+            getAdviceBtn.disabled = false;
+            getAdviceBtn.classList.remove('opacity-50');
         });
     </script>
 </body>
