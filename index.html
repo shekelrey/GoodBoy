@@ -571,9 +571,9 @@
             getAdviceBtn.disabled = true;
             getAdviceBtn.classList.add('opacity-50');
 
- try {
-                // CHANGED: Switched to 'gemini-pro' (Classic Stable) which works universally
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+             try {
+                // CHANGED: Switched to 'gemini-2.5-flash-preview-09-2025' as requested
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
