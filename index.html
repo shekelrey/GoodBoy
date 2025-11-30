@@ -322,9 +322,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // --- CONFIGURATION START ---
-        // REPLACE THESE VALUES WITH YOUR REAL FIREBASE KEYS
-const firebaseConfig = {
+        // 🔥🔥🔥 PASTE KEYS HERE 🔥🔥🔥
+        const firebaseConfig = {
   apiKey: "AIzaSyCS-YXDEWDDXN5ibnvPQd2RCE6NVr_gPfo",
   authDomain: "goodboy-landing-page.firebaseapp.com",
   projectId: "goodboy-landing-page",
@@ -333,7 +332,7 @@ const firebaseConfig = {
   appId: "1:809463040114:web:fd74ae691f0041d94ddaeb",
   measurementId: "G-J3WC15NQ3R"
         };
-        // --- CONFIGURATION END ---
+        // 🔥🔥🔥 END KEYS SECTION 🔥🔥🔥
 
         // Check if running on file:// protocol (which breaks modules)
         if (window.location.protocol === 'file:') {
@@ -346,7 +345,7 @@ const firebaseConfig = {
 
         try {
             // Basic check if keys were replaced
-            if (firebaseConfig.apiKey === "AIzaSyCS-YXDEWDDXN5ibnvPQd2RCE6NVr_gPfo") {
+            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
                 console.warn("⚠️ Firebase config is missing! Using UI-only mode.");
             } else {
                 app = initializeApp(firebaseConfig);
