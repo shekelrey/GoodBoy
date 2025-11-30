@@ -562,10 +562,9 @@
    // ENDPOINTS TO TRY (Model + Version combination)
         // This is the "Universal Adapter" list.
         const ENDPOINTS = [
-            { version: 'v1beta', model: 'gemini-2.5-flash-preview-09-2025' }, // Requested model first
-            { version: 'v1beta', model: 'gemini-2.5-flash' },               // Shorthand just in case
-            { version: 'v1beta', model: 'gemini-1.5-flash' },               // Fallback 1
-            { version: 'v1',     model: 'gemini-pro' }                      // Fallback 2
+            {model: 'gemini-2.5-flash' },               // Shorthand just in case
+            {model: 'gemini-1.5-flash' },               // Fallback 1
+            {model: 'gemini-pro' }                      // Fallback 2
         ];
 
         getAdviceBtn.addEventListener('click', async () => {
