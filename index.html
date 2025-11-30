@@ -551,29 +551,46 @@
 
   <!-- Gemini AI Script (Separate script tag for clarity) -->
     <script>
-        // AI Logic
-        const apiKey = "AIzaSyAei8pMCWcDvrwrRxFjp8zgIjOZCM8Fw0c"; // Insert Gemini API Key Here
+        // 1. SETUP & CONFIGURATION
+        // ========================
+        // PASTE YOUR API KEY HERE (Keep the quotes!)
+        const geminiApiKey = "AIzaSyAei8pMCWcDvrwrRxFjp8zgIjOZCM8Fw0c"; 
+
+        // DOM Elements
         const getAdviceBtn = document.getElementById('getAdviceBtn');
         const dogDescription = document.getElementById('dogDescription');
         const aiResponse = document.getElementById('aiResponse');
         const aiResponseText = document.getElementById('aiResponseText');
         const aiLoading = document.getElementById('aiLoading');
 
-   // ENDPOINTS TO TRY (Model + Version combination)
-        // This is the "Universal Adapter" list.
+        // 2. MODEL STRATEGY
+        // =================
+        // We try these models in order. If one fails (404), we try the next.
         const ENDPOINTS = [
-            {model: 'gemini-2.5-flash' },               // Shorthand just in case
-            {model: 'gemini-1.5-flash' },               // Fallback 1
-            {model: 'gemini-pro' }                      // Fallback 2
+            { version: 'v1beta', model: 'gemini-2.5-flash' }, // Latest & Greatest
+            { version: 'v1beta', model: 'gemini-1.5-flash' },               // Fast & Stable
+            { version: 'v1beta', model: 'gemini-1.5-pro' },                 // Smart & Stable
+            { version: 'v1',     model: 'gemini-pro' }                      // The Classic Fallback
         ];
 
+        // 3. MAIN LOGIC
+        // =============
         getAdviceBtn.addEventListener('click', async () => {
             const userInput = dogDescription.value.trim();
+            
+            // Validation
             if (!userInput) {
                 alert('ספרו לנו קצת על הכלב בבקשה!');
                 return;
             }
-            
+
+            // Safety Check for Missing Key
+            if (!geminiApiKey || geminiApiKey.includes("YOUR_GEMINI")) {
+                alert("שגיאה: חסר מפתח API. נא להוסיף את ה-Key לקוד.");
+                return;
+            }
+
+            // UI State: Loading
             aiLoading.classList.remove('hidden');
             aiResponse.classList.add('hidden');
             getAdviceBtn.disabled = true;
@@ -582,11 +599,14 @@
             let success = false;
             let lastError = "";
 
-            // Try endpoints one by one until success
+            // Loop through models until one works
             for (const endpoint of ENDPOINTS) {
-                console.log(`Trying: ${endpoint.version}/${endpoint.model}...`);
+                console.log(`Attempting connection to: ${endpoint.model} (${endpoint.version})...`);
+                
                 try {
-                    const response = await fetch(`https://generativelanguage.googleapis.com/${endpoint.version}/models/${endpoint.model}:generateContent?key=${geminiApiKey}`, {
+                    const url = `https://generativelanguage.googleapis.com/${endpoint.version}/models/${endpoint.model}:generateContent?key=${geminiApiKey}`;
+                    
+                    const response = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -614,35 +634,40 @@
 
                     if (!response.ok) {
                         const errorData = await response.json();
-                        throw new Error(errorData.error?.message || `Status ${response.status}`);
+                        throw new Error(errorData.error?.message || `HTTP Error ${response.status}`);
                     }
                     
                     const data = await response.json();
                     const aiText = data.candidates[0].content.parts[0].text;
                     
+                    // Success! Update UI
                     aiResponseText.innerHTML = marked.parse(aiText);
                     aiResponse.classList.remove('hidden');
                     success = true;
-                    console.log(`Success with ${endpoint.version}/${endpoint.model}!`);
-                    break; // Stop loop if successful
+                    console.log(`Success! Connected to ${endpoint.model}`);
+                    break; // Stop the loop, we found a working model
 
                 } catch (error) {
-                    console.warn(`Failed ${endpoint.version}/${endpoint.model}:`, error.message);
+                    console.warn(`Failed to connect to ${endpoint.model}:`, error.message);
                     lastError = error.message;
-                    // Continue to next model...
+                    // Loop continues to next model...
                 }
             }
 
+            // If all models failed
             if (!success) {
-                console.error("All models failed.");
-                alert(`שגיאה בחיבור ל-AI (כל המודלים נכשלו):\n${lastError}\n\nטיפ: וודא ש-Generative Language API מופעל בפרויקט שלך ב-Google Cloud.`);
+                console.error("All AI models failed.");
+                alert(`שגיאה בחיבור ל-AI:\n${lastError}\n\n(בדוק את הקונסול F12 לפרטים נוספים)`);
             }
 
+            // UI State: Reset
             aiLoading.classList.add('hidden');
             getAdviceBtn.disabled = false;
             getAdviceBtn.classList.remove('opacity-50');
         });
-
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
