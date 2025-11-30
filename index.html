@@ -325,12 +325,13 @@
         // --- CONFIGURATION START ---
         // REPLACE THESE VALUES WITH YOUR REAL FIREBASE KEYS
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyCS-YXDEWDDXN5ibnvPQd2RCE6NVr_gPfo",
+  authDomain: "goodboy-landing-page.firebaseapp.com",
+  projectId: "goodboy-landing-page",
+  storageBucket: "goodboy-landing-page.firebasestorage.app",
+  messagingSenderId: "809463040114",
+  appId: "1:809463040114:web:fd74ae691f0041d94ddaeb",
+  measurementId: "G-J3WC15NQ3R"
         };
         // --- CONFIGURATION END ---
 
@@ -345,7 +346,7 @@
 
         try {
             // Basic check if keys were replaced
-            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+            if (firebaseConfig.apiKey === "AIzaSyCS-YXDEWDDXN5ibnvPQd2RCE6NVr_gPfo") {
                 console.warn("⚠️ Firebase config is missing! Using UI-only mode.");
             } else {
                 app = initializeApp(firebaseConfig);
