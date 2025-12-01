@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body {
             font-family: 'Rubik', sans-serif;
@@ -23,15 +22,6 @@
         body.modal-active {
             overflow-x: hidden;
             overflow-y: visible !important;
-        }
-        .shimmer {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
         }
         /* Floating treats animation */
         @keyframes float {
@@ -155,121 +145,77 @@
                         <span class="text-2xl">🥩</span>
                     </div>
                     <h3 class="font-bold text-gray-800">ACANA</h3>
-                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">במלאי</span>
+                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">זמין למשלוח</span>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center hover:shadow-md transition group cursor-pointer">
                     <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                         <span class="text-2xl">🍗</span>
                     </div>
                     <h3 class="font-bold text-gray-800">ORIJEN</h3>
-                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">במלאי</span>
+                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">זמין למשלוח</span>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center hover:shadow-md transition group cursor-pointer">
                     <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                         <span class="text-2xl">🐕</span>
                     </div>
                     <h3 class="font-bold text-gray-800 text-center">Royal Canin</h3>
-                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">במלאי</span>
+                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">זמין למשלוח</span>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center hover:shadow-md transition group cursor-pointer">
                     <div class="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                         <span class="text-2xl">🐺</span>
                     </div>
                     <h3 class="font-bold text-gray-800 text-center text-sm">Taste of the Wild</h3>
-                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">במלאי</span>
+                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">זמין למשלוח</span>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center hover:shadow-md transition group cursor-pointer">
                     <div class="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                         <span class="text-2xl">🏃</span>
                     </div>
                     <h3 class="font-bold text-gray-800">GO! Solutions</h3>
-                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">במלאי</span>
+                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">זמין למשלוח</span>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center hover:shadow-md transition group cursor-pointer">
                     <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition">
                         <span class="text-2xl">🇮🇹</span>
                     </div>
                     <h3 class="font-bold text-gray-800">Monge</h3>
-                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">במלאי</span>
+                    <span class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full mt-1">זמין למשלוח</span>
                 </div>
             </div>
             <div class="text-center mt-8">
-                <p class="text-sm text-gray-500 mb-3">לא מצאתם את המותג שלכם?</p>
-                <a href="#check-availability" class="text-orange-600 font-bold hover:underline">בדקו איתנו בטופס למטה 👇</a>
+                <p class="text-sm text-gray-500 mb-3">המותג שלכם חסר?</p>
+                <a href="#check-availability" class="text-orange-600 font-bold hover:underline">ספרו לנו ואולי נפתיע אתכם 👇</a>
             </div>
         </div>
     </section>
 
-    <!-- AI Bundle Matcher -->
-    <section class="py-16 bg-gradient-to-b from-white to-gray-50 border-t border-gray-100">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-start gap-8">
-                <div class="flex-1">
-                    <div class="inline-flex items-center gap-2 bg-gray-900 text-white px-4 py-1 rounded-full shadow-md mb-4">
-                        <span class="text-lg">🤖</span>
-                        <span class="text-sm font-bold">GoodBoy AI</span>
-                    </div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-3">בואו נבנה את המארז המושלם</h2>
-                    <p class="text-gray-600 mb-6">
-                        ספרו לנו על הכלב, וה-AI שלנו יתאים לו את <strong>השילוש הקדוש:</strong><br>
-                        האוכל הכי בריא + החטיף הכי טעים + הצעצוע הכי מתאים.
-                    </p>
-                    <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-orange-400 to-yellow-400"></div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">מי הילד הטוב? (גזע, גיל, מה הוא אוהב ללעוס?)</label>
-                        <textarea id="dogDescription" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition resize-none" placeholder="למשל: לברדור בן שנתיים, הורס צעצועים סדרתי, אוהב הכל..."></textarea>
-                        <button id="getAdviceBtn" class="mt-4 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-xl shadow-md transition transform hover:-translate-y-1 flex items-center justify-center gap-2 w-full sm:w-auto">
-                            <span>הרכב לי חבילה</span>
-                            <i class="fa-solid fa-magic"></i>
-                        </button>
-                        <div id="aiResponse" class="mt-6 hidden">
-                            <div class="bg-orange-50 p-5 rounded-xl border border-orange-100">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <i class="fa-solid fa-box-open text-orange-600"></i>
-                                    <h4 class="font-bold text-gray-900">המארז המומלץ שלכם:</h4>
-                                </div>
-                                <div id="aiResponseText" class="text-sm text-gray-700 leading-relaxed prose prose-sm max-w-none"></div>
-                            </div>
-                        </div>
-                        <div id="aiLoading" class="mt-6 hidden">
-                            <div class="space-y-3">
-                                <div class="h-4 bg-gray-100 rounded w-3/4 shimmer"></div>
-                                <div class="h-4 bg-gray-100 rounded w-1/2 shimmer"></div>
-                                <div class="h-4 bg-gray-100 rounded w-5/6 shimmer"></div>
-                            </div>
-                        </div>
-                    </div>
+<!-- The Fake Door Form (Optimized for Conversion) -->
+<section id="check-availability" class="py-20 bg-gray-900 text-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <i class="fa-solid fa-paw absolute top-10 left-10 text-6xl"></i>
+        <i class="fa-solid fa-bone absolute bottom-20 right-20 text-8xl rotate-45"></i>
+    </div>
+    <div class="max-w-3xl mx-auto px-4 relative z-10">
+        <div class="bg-white text-gray-900 rounded-3xl p-6 md:p-10 shadow-2xl border-4 border-orange-100">
+            <div class="text-center mb-6">
+                <div class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-3">
+                    🔥 נשארו 14 מקומות בפיילוט
                 </div>
-                <div class="hidden md:block w-1/3 pt-8">
-                    <div class="bg-white p-4 rounded-3xl shadow-xl rotate-2 border border-gray-100 transform hover:rotate-0 transition duration-500">
-                        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=600&q=80" alt="Dog with treat" class="rounded-2xl w-full mb-4">
-                        <div class="text-center">
-                            <p class="font-bold text-gray-800">מארז "לועסים כבדים"</p>
-                            <p class="text-xs text-gray-500">אקאנה בקר + קרן אייל + קונג אקסטרים</p>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-2">בדיקת זמינות מהירה</h2>
+                <p class="text-gray-500 text-sm md:text-base">
+                    הכניסו פרטים כדי לראות אם אנחנו מגיעים אליכם הערב.<br>
+                    <span class="text-orange-600 font-bold">🎁 נמצאתם מתאימים? תקבלו מארז חטיפים מתנה!</span>
+                </p>
             </div>
-        </div>
-    </section>
 
-    <!-- The Fake Door Form -->
-    <section id="check-availability" class="py-20 bg-gray-900 text-white relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <i class="fa-solid fa-paw absolute top-10 left-10 text-6xl"></i>
-            <i class="fa-solid fa-bone absolute bottom-20 right-20 text-8xl rotate-45"></i>
-        </div>
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <div class="bg-white text-gray-900 rounded-3xl p-8 md:p-12 shadow-2xl">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold mb-2">בדיקת זמינות בשרון</h2>
-                    <p class="text-gray-600">הצטרפו למהפכה ובדקו אם אנחנו מגיעים אליכם הערב:</p>
-                </div>
-                <form id="fakeDoorForm" class="space-y-6">
+            <form id="fakeDoorForm" class="space-y-4">
+                <!-- Row 1: City & Brand (The Essentials) -->
+                <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">עיר מגורים</label>
-                        <select id="citySelect" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition bg-white text-gray-700">
-                            <option value="" disabled selected>בחר עיר...</option>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">עיר מגורים</label>
+                        <select id="citySelect" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition bg-gray-50 text-gray-900">
+                            <option value="" disabled selected>איפה אתם גרים?</option>
                             <option value="Netanya">נתניה</option>
                             <option value="Herzliya">הרצליה</option>
                             <option value="Ra'anana">רעננה</option>
@@ -281,60 +227,60 @@
                             <option value="Tel Mond">תל מונד</option>
                             <option value="Other">אחר...</option>
                         </select>
-                        <!-- Hidden Manual Input for City -->
-                        <div id="otherCityDiv" class="hidden mt-3">
-                            <input type="text" id="otherCityInput" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition" placeholder="הקלד את שם העיר...">
+                        <div id="otherCityDiv" class="hidden mt-2">
+                            <input type="text" id="otherCityInput" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm" placeholder="שם העיר...">
                         </div>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-2">שם מלא</label>
-                            <input type="text" id="nameInput" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition" placeholder="ישראל ישראלי">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-2">נייד (לעדכוני משלוח)</label>
-                            <input type="tel" id="phoneInput" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition" placeholder="050-0000000">
-                        </div>
-                    </div>
+
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">איזה אוכל הכלב אוכל כרגע?</label>
-                        <select id="brandSelect" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition bg-white text-gray-700">
-                            <option value="" disabled selected>בחר מותג...</option>
-                            <option value="Acana">Acana (אקאנה)</option>
-                            <option value="Orijen">Orijen (אוריג'ן)</option>
-                            <option value="Royal Canin">Royal Canin (רויאל קנין)</option>
-                            <option value="Taste of the Wild">Taste of the Wild (טייסט אוף דה ווילד)</option>
-                            <option value="Go!">Go! (גו!)</option>
-                            <option value="Now Fresh">Now Fresh (נאו פרש)</option>
-                            <option value="Monge">Monge (מונג')</option>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">מותג אוכל</label>
+                        <select id="brandSelect" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition bg-gray-50 text-gray-900">
+                            <option value="" disabled selected>מה הכלב אוכל?</option>
+                            <option value="Acana">Acana</option>
+                            <option value="Orijen">Orijen</option>
+                            <option value="Royal Canin">Royal Canin</option>
+                            <option value="Taste of the Wild">Taste of the Wild</option>
+                            <option value="Go!">Go!</option>
+                            <option value="Now Fresh">Now Fresh</option>
+                            <option value="Monge">Monge</option>
                             <option value="Other">אחר...</option>
                         </select>
-                        <!-- Hidden Manual Input for Brand -->
-                        <div id="otherBrandDiv" class="hidden mt-3">
-                            <input type="text" id="otherBrandInput" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition" placeholder="הקלד את שם המותג...">
+                        <div id="otherBrandDiv" class="hidden mt-2">
+                            <input type="text" id="otherBrandInput" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm" placeholder="שם המותג...">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">מה משמח את הכלב שלך? (נשבעים שזה חשוב)</label>
-                        <select id="upsellSelect" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:ring-0 outline-none transition bg-white text-gray-700">
-                            <option value="" disabled selected>בחר פינוק...</option>
-                            <option value="Treats">חטיפים טבעיים ובריאים 🥩</option>
-                            <option value="Toys">צעצועים חזקים למשחק 🎾</option>
-                            <option value="Chews">עצמות לעיסה ארוכה 🦴</option>
-                            <option value="FoodOnly">רק אוכל (הוא בדיאטה) 🥗</option>
-                        </select>
+                </div>
+
+                <!-- Row 2: Phone (The only personal data) -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">וואטסאפ לעדכון (לא נספים!)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i>
+                        </div>
+                        <input type="tel" id="phoneInput" required class="w-full pr-10 pl-4 py-3 rounded-lg border-2 border-gray-200 focus:border-green-500 focus:ring-0 outline-none transition bg-white text-lg tracking-wide" placeholder="050-0000000">
                     </div>
-                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 rounded-xl text-lg shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-3 mt-6">
-                        <span>בדיקת זמינות באזורך</span>
-                        <i class="fa-solid fa-location-arrow"></i>
-                    </button>
-                    <p class="text-center text-xs text-gray-400 mt-4">
-                        ההרשמה מהווה הסכמה לקבלת עדכונים ואישור למדיניות הפרטיות.
-                    </p>
-                </form>
-            </div>
+                </div>
+                
+                <!-- Big Action Button -->
+                <button type="submit" id="submitBtn" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 rounded-xl text-lg shadow-xl transition transform hover:-translate-y-1 flex items-center justify-center gap-2 mt-2">
+                    <span>בדיקת זמינות + קבלת מתנה</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                
+                <!-- Social Proof Micro-Copy -->
+                <div class="flex items-center justify-center gap-2 mt-4 opacity-70">
+                    <div class="flex -space-x-2 space-x-reverse">
+                        <div class="w-6 h-6 rounded-full bg-gray-300 border-2 border-white"></div>
+                        <div class="w-6 h-6 rounded-full bg-gray-400 border-2 border-white"></div>
+                        <div class="w-6 h-6 rounded-full bg-gray-500 border-2 border-white"></div>
+                    </div>
+                    <p class="text-xs text-gray-500">הצטרפו ל-140+ שכנים ברשימה</p>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-gray-50 py-8 border-t border-gray-200">
@@ -344,7 +290,7 @@
                 <span class="text-gray-600 font-bold">GoodBoy</span>
             </div>
             <div class="text-sm text-gray-500">
-                © 2024 כל הזכויות שמורות | נבנה באהבה לכלבים ❤️
+                © 2025 כל הזכויות שמורות | נבנה באהבה לכלבים (ולבעלים שלהם) ❤️
             </div>
         </div>
     </footer>
@@ -357,20 +303,20 @@
                 <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <span class="text-4xl">🎉</span>
                 </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modalTitle">איזה כיף!</h3>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4" id="modalTitle">ברוכים הבאים למועדון!</h3>
                 <div class="text-gray-600 space-y-4 text-base leading-relaxed">
                     <p>
-                        השירות שלנו ב<span id="cityNameSpan" class="font-bold text-orange-600"></span> נמצא כרגע בבנייה עקב ביקוש גבוה.
+                        שירות ה-VIP שלנו ב<span id="cityNameSpan" class="font-bold text-orange-600"></span> נמצא בהרצה עקב ביקוש מטורף.
                     </p>
                     <div class="bg-orange-50 p-4 rounded-xl border border-orange-100 text-sm">
-                        <strong>החדשות הטובות:</strong><br>
-                        נכנסת לרשימת ה-VIP! ברגע שנפתח את הקו (ממש בקרוב), נשלח לך קופון:
+                        <strong>הבטחתם את מקומכם:</strong><br>
+                        ברגע שנפתח את הקו לאזורכם (ממש בקרוב), תקבלו עדכון אישי וקופון בלעדי:
                         <div class="mt-2 font-bold text-lg text-gray-900 border-t border-dashed border-orange-200 pt-2">
-                            🎁 חטיף טבעי מתנה במשלוח הראשון
+                            🎁 חטיף פרימיום טבעי מתנה במשלוח הראשון
                         </div>
                     </div>
                     <p class="text-sm text-gray-500">
-                        תודה על הסבלנות, הכלב שלך יודה לך בקרוב!
+                        תודה על הסבלנות, הכלב שלכם הולך להודות לכם בענק!
                     </p>
                 </div>
                 <button id="closeModalBtn" class="mt-8 w-full bg-gray-900 text-white font-bold py-3 px-4 rounded-xl hover:bg-gray-800 transition">
@@ -386,18 +332,17 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // --- CONFIGURATION START ---
-        // REPLACE THESE VALUES WITH YOUR REAL FIREBASE KEYS
+        // 🔥🔥🔥 PASTE KEYS HERE 🔥🔥🔥
         const firebaseConfig = {
             apiKey: "AIzaSyCS-YXDEWDDXN5ibnvPQd2RCE6NVr_gPfo",
-  authDomain: "goodboy-landing-page.firebaseapp.com",
-  projectId: "goodboy-landing-page",
-  storageBucket: "goodboy-landing-page.firebasestorage.app",
-  messagingSenderId: "809463040114",
-  appId: "1:809463040114:web:fd74ae691f0041d94ddaeb",
-  measurementId: "G-J3WC15NQ3R"
+            authDomain: "goodboy-landing-page.firebaseapp.com",
+            projectId: "goodboy-landing-page",
+            storageBucket: "goodboy-landing-page.firebasestorage.app",
+            messagingSenderId: "809463040114",
+            appId: "1:809463040114:web:fd74ae691f0041d94ddaeb",
+            measurementId: "G-J3WC15NQ3R"
         };
-        // --- CONFIGURATION END ---
+        // 🔥🔥🔥 END KEYS SECTION 🔥🔥🔥
 
         // Check if running on file:// protocol (which breaks modules)
         if (window.location.protocol === 'file:') {
@@ -424,18 +369,16 @@
 
         // Form Elements
         const form = document.getElementById('fakeDoorForm');
+        
         const citySelect = document.getElementById('citySelect');
         const otherCityDiv = document.getElementById('otherCityDiv');
         const otherCityInput = document.getElementById('otherCityInput');
-        
-        const nameInput = document.getElementById('nameInput');
-        const phoneInput = document.getElementById('phoneInput');
         
         const brandSelect = document.getElementById('brandSelect');
         const otherBrandDiv = document.getElementById('otherBrandDiv');
         const otherBrandInput = document.getElementById('otherBrandInput');
         
-        const upsellSelect = document.getElementById('upsellSelect');
+        const phoneInput = document.getElementById('phoneInput');
         const submitBtn = document.getElementById('submitBtn');
 
         // Modal Elements
@@ -487,19 +430,16 @@
                 selectedBrand = otherBrandInput.value;
             }
 
-            const name = nameInput.value;
+            // Handle Phone
             const phone = phoneInput.value;
-            const upsell = upsellSelect.options[upsellSelect.selectedIndex].text;
 
             try {
                 if (firebaseReady && db) {
                     // Try to write to Firebase
                     await addDoc(collection(db, "leads"), {
-                        name: name,
                         phone: phone,
                         city: selectedCity,
                         brand: selectedBrand,
-                        upsellPreference: upsell,
                         timestamp: serverTimestamp()
                     });
                     console.log("Document written to Firebase!");
@@ -509,7 +449,7 @@
                     await new Promise(resolve => setTimeout(resolve, 800));
                 }
                 
-                // Show Success Modal (Even if Firebase failed or wasn't set up)
+                // Show Success Modal
                 cityNameSpan.textContent = selectedCity;
                 toggleModal();
 
@@ -520,7 +460,8 @@
                 toggleModal();
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>בדיקת זמינות באזורך</span><i class="fa-solid fa-location-arrow"></i>`;
+                // Restore original button text
+                submitBtn.innerHTML = `<span>בדיקת זמינות + קבלת מתנה</span><i class="fa-solid fa-arrow-left"></i>`;
             }
         });
 
@@ -547,127 +488,6 @@
                 modalContent.classList.add('scale-95');
             }
         }
-    </script>
-
-  <!-- Gemini AI Script (Separate script tag for clarity) -->
-    <script>
-        // 1. SETUP & CONFIGURATION
-        // ========================
-        // PASTE YOUR API KEY HERE (Keep the quotes!)
-        const geminiApiKey = "AIzaSyAei8pMCWcDvrwrRxFjp8zgIjOZCM8Fw0c"; 
-
-        // DOM Elements
-        const getAdviceBtn = document.getElementById('getAdviceBtn');
-        const dogDescription = document.getElementById('dogDescription');
-        const aiResponse = document.getElementById('aiResponse');
-        const aiResponseText = document.getElementById('aiResponseText');
-        const aiLoading = document.getElementById('aiLoading');
-
-        // 2. MODEL STRATEGY
-        // =================
-        // We try these models in order. If one fails (404), we try the next.
-        const ENDPOINTS = [
-            { version: 'v1beta', model: 'gemini-2.5-flash' }, // Latest & Greatest
-            { version: 'v1beta', model: 'gemini-1.5-flash' },               // Fast & Stable
-            { version: 'v1beta', model: 'gemini-1.5-pro' },                 // Smart & Stable
-            { version: 'v1',     model: 'gemini-pro' }                      // The Classic Fallback
-        ];
-
-        // 3. MAIN LOGIC
-        // =============
-        getAdviceBtn.addEventListener('click', async () => {
-            const userInput = dogDescription.value.trim();
-            
-            // Validation
-            if (!userInput) {
-                alert('ספרו לנו קצת על הכלב בבקשה!');
-                return;
-            }
-
-            // Safety Check for Missing Key
-            if (!geminiApiKey || geminiApiKey.includes("YOUR_GEMINI")) {
-                alert("שגיאה: חסר מפתח API. נא להוסיף את ה-Key לקוד.");
-                return;
-            }
-
-            // UI State: Loading
-            aiLoading.classList.remove('hidden');
-            aiResponse.classList.add('hidden');
-            getAdviceBtn.disabled = true;
-            getAdviceBtn.classList.add('opacity-50');
-
-            let success = false;
-            let lastError = "";
-
-            // Loop through models until one works
-            for (const endpoint of ENDPOINTS) {
-                console.log(`Attempting connection to: ${endpoint.model} (${endpoint.version})...`);
-                
-                try {
-                    const url = `https://generativelanguage.googleapis.com/${endpoint.version}/models/${endpoint.model}:generateContent?key=${geminiApiKey}`;
-                    
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [{
-                                    text: `You are an expert concierge at "GoodBoy" Israel.
-                                    Brand Values: "Same Day Delivery. VIP Service. No Compromises." (משלוח מהיום להיום. שירות VIP. אפס פשרות.)
-                                    
-                                    User Input: "${userInput}"
-                                    
-                                    Task: Recommend a "VIP Bundle" containing:
-                                    1. ONE specific Premium Dog Food Brand (Acana, Orijen, Royal Canin, Go, Monge).
-                                    2. ONE specific High-Quality Treat.
-                                    3. ONE specific Premium Toy.
-                                    
-                                    Rules:
-                                    - Reply in Hebrew.
-                                    - Tone: Professional, enthusiastic, focused on quality/speed but keep responses not too lengthy.
-                                    - Explain WHY this specific combo is the "No Compromise" choice for this dog.
-                                    - Use emojis.`
-                                }]
-                            }]
-                        })
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error?.message || `HTTP Error ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    const aiText = data.candidates[0].content.parts[0].text;
-                    
-                    // Success! Update UI
-                    aiResponseText.innerHTML = marked.parse(aiText);
-                    aiResponse.classList.remove('hidden');
-                    success = true;
-                    console.log(`Success! Connected to ${endpoint.model}`);
-                    break; // Stop the loop, we found a working model
-
-                } catch (error) {
-                    console.warn(`Failed to connect to ${endpoint.model}:`, error.message);
-                    lastError = error.message;
-                    // Loop continues to next model...
-                }
-            }
-
-            // If all models failed
-            if (!success) {
-                console.error("All AI models failed.");
-                alert(`שגיאה בחיבור ל-AI:\n${lastError}\n\n(בדוק את הקונסול F12 לפרטים נוספים)`);
-            }
-
-            // UI State: Reset
-            aiLoading.classList.add('hidden');
-            getAdviceBtn.disabled = false;
-            getAdviceBtn.classList.remove('opacity-50');
-        });
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
