@@ -302,7 +302,17 @@
                 app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
                 firebaseReady = true;
+
+// AUTOMATIC PAGE VIEW TRACKER
+// This saves a blank "Visitor" entry just to prove the connection works
+addDoc(collection(db, "site_visits"), {
+    timestamp: serverTimestamp(),
+    referrer: document.referrer || "Direct",
+    userAgent: navigator.userAgent
+}).catch(e => console.error("Visitor tracking failed:", e));
             }
+
+
         } catch (error) {
             console.error("Firebase Init Error:", error);
         }
