@@ -59,8 +59,8 @@
                 </div>
 
                 <h1 class="text-3xl md:text-5xl font-bold leading-tight text-gray-900 mb-4">
-                    אוכל לכלב שלך עד הבית <br>
-                    <span class="text-orange-600">בלחיצת כפתור</span>
+                    אוכל לכלבים עד הבית —<br>
+                    <span class="text-orange-600">מהיום להיום.</span>
                 </h1>
                 
                 <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
@@ -198,7 +198,7 @@
                 <span class="text-gray-600 font-bold">GoodBoy</span>
             </div>
             <div class="text-xs text-gray-400">
-                © 2025 GoodBoy Israel.
+                © 2024 GoodBoy Israel.
             </div>
         </div>
     </footer>
@@ -302,52 +302,12 @@
                 app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
                 firebaseReady = true;
-
-// AUTOMATIC PAGE VIEW TRACKER
-// This saves a blank "Visitor" entry just to prove the connection works
-// AUTOMATIC PAGE VIEW TRACKER (With Location)
-        // 1. Fetch location data silently
-        fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-                // 2. Save to Firebase with location details
-                addDoc(collection(db, "site_visits"), {
-                    timestamp: serverTimestamp(),
-                    referrer: document.referrer || "Direct",
-                    userAgent: navigator.userAgent,
-                    location: {
-                        city: data.city || "Unknown",
-                        region: data.region || "Unknown",
-                        country: data.country_name || "Unknown",
-                        ip: data.ip || "Anonymized"
-                    }
-                });
-            })
-            .catch(error => {
-                console.warn("Could not fetch location, saving basic info.");
-                // Fallback: Save without location if the IP service fails
-                addDoc(collection(db, "site_visits"), {
-                    timestamp: serverTimestamp(),
-                    referrer: document.referrer || "Direct",
-                    userAgent: navigator.userAgent,
-                    location: "Unavailable"
-                });
-            });
-                    }
-
-
+            }
         } catch (error) {
             console.error("Firebase Init Error:", error);
         }
 
         // DOM Elements
-        const citySelect = document.getElementById('citySelect');
-        const brandSelect = document.getElementById('brandSelect');
-        const otherCityDiv = document.getElementById('otherCityDiv');
-        const otherCityInput = document.getElementById('otherCityInput');
-        const otherBrandDiv = document.getElementById('otherBrandDiv');
-        const otherBrandInput = document.getElementById('otherBrandInput');
-        
         const step1Form = document.getElementById('step1Form');
         const step2Form = document.getElementById('step2Form');
         const modal = document.getElementById('step2Modal');
@@ -357,9 +317,117 @@
 
         // Data Management
         let step1Data = {};
-        let currentLeadId = null; // Tracks the document ID from Step 1
+let currentLeadId = null; // Tracks the document ID from Step 1
+let visitDocId = null;    // Tracks the visitor document ID
+let startTime = Date.now(); // When we started tracking this visit
+let durationInterval = null; // Interval handler
+
+// Helper to calculate current duration and push to Firestore
+async function updateDuration() {
+    if (!firebaseReady || !db || !visitDocId) return;
+
+    const durationSeconds = Math.floor((Date.now() - startTime) / 1000);
+
+    // Don’t spam Firestore with 0s
+    if (durationSeconds < 1) return;
+
+    const visitRef = doc(db, "site_visits", visitDocId);
+    try {
+        await updateDoc(visitRef, { duration: durationSeconds });
+    } catch (e) {
+        console.log("Duration update failed", e);
+    }
+}
+
+
+// --- AUTOMATIC PAGE VIEW TRACKER (With Location & Robust Duration) ---
+if (firebaseReady && db) {
+    const visitsCol = collection(db, "site_visits");
+
+    function startHeartbeat() {
+        // Heartbeat: update every 1 second while tab is visible
+        durationInterval = setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                updateDuration();
+            }
+        }, 1000);
+
+        // Final flush when user leaves / hides the page
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                updateDuration(); // last best effort
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            updateDuration(); // some browsers fire this on unload
+        });
+    }
+
+    // 1. Fetch location data silently
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(async (data) => {
+            try {
+                // 2. Save initial visit
+                const docRef = await addDoc(visitsCol, {
+                    timestamp: serverTimestamp(),
+                    referrer: document.referrer || "Direct",
+                    userAgent: navigator.userAgent,
+                    location: {
+                        city: data.city || "Unknown",
+                        region: data.region || "Unknown",
+                        country: data.country_name || "Unknown",
+                        ip: data.ip || "Anonymized"
+                    },
+                    duration: 0
+                });
+
+                visitDocId = docRef.id;
+                startTime = Date.now();
+                console.log("Visit tracked:", visitDocId);
+
+                // 3. Start duration tracking
+                startHeartbeat();
+
+            } catch (e) {
+                console.error("Error tracking visit:", e);
+            }
+        })
+        .catch(async (error) => {
+            console.warn("Location fetch failed, saving basic visit.", error);
+            try {
+                // Fallback: Save without location
+                const docRef = await addDoc(visitsCol, {
+                    timestamp: serverTimestamp(),
+                    referrer: document.referrer || "Direct",
+                    userAgent: navigator.userAgent,
+                    location: "Unavailable",
+                    duration: 0
+                });
+
+                visitDocId = docRef.id;
+                startTime = Date.now();
+                console.log("Visit tracked (no location):", visitDocId);
+
+                // Start heartbeat fallback
+                startHeartbeat();
+            } catch (e) {
+                console.error("Error tracking visit (fallback):", e);
+            }
+        });
+}
+// ------------------------------------------------------------
+
 
         // Toggle Manual Inputs
+        const citySelect = document.getElementById('citySelect');
+        const brandSelect = document.getElementById('brandSelect');
+        const otherCityInput = document.getElementById('otherCityInput');
+        const otherBrandInput = document.getElementById('otherBrandInput');
+        const otherCityDiv = document.getElementById('otherCityDiv');
+        const otherBrandDiv = document.getElementById('otherBrandDiv');
+
         citySelect.addEventListener('change', function() {
             if (this.value === 'Other') {
                 otherCityDiv.classList.remove('hidden');
@@ -380,7 +448,7 @@
             }
         });
 
-        // Step 1 Handler (Availability Check)
+        // Step 1 Handler
         step1Form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -412,7 +480,6 @@
                 }
             } catch (error) {
                 console.error("Error saving partial lead:", error);
-                // We continue to Step 2 even if save fails
             }
             
             // Show Step 2 Modal
@@ -497,8 +564,7 @@
         window.onclick = function(event) {
             if (event.target.classList.contains('modal-overlay')) {
                 // Optional: Close on overlay click
+                // toggleModal(modal); 
             }
         }
     </script>
-</body>
-</html>
