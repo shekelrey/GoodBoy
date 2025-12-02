@@ -305,12 +305,35 @@
 
 // AUTOMATIC PAGE VIEW TRACKER
 // This saves a blank "Visitor" entry just to prove the connection works
-addDoc(collection(db, "site_visits"), {
-    timestamp: serverTimestamp(),
-    referrer: document.referrer || "Direct",
-    userAgent: navigator.userAgent
-}).catch(e => console.error("Visitor tracking failed:", e));
-            }
+// AUTOMATIC PAGE VIEW TRACKER (With Location)
+        // 1. Fetch location data silently
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                // 2. Save to Firebase with location details
+                addDoc(collection(db, "site_visits"), {
+                    timestamp: serverTimestamp(),
+                    referrer: document.referrer || "Direct",
+                    userAgent: navigator.userAgent,
+                    location: {
+                        city: data.city || "Unknown",
+                        region: data.region || "Unknown",
+                        country: data.country_name || "Unknown",
+                        ip: data.ip || "Anonymized"
+                    }
+                });
+            })
+            .catch(error => {
+                console.warn("Could not fetch location, saving basic info.");
+                // Fallback: Save without location if the IP service fails
+                addDoc(collection(db, "site_visits"), {
+                    timestamp: serverTimestamp(),
+                    referrer: document.referrer || "Direct",
+                    userAgent: navigator.userAgent,
+                    location: "Unavailable"
+                });
+            });
+                    }
 
 
         } catch (error) {
